@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import Summary from './SummaryTotal/Summary'
+import Total from './SummaryTotal/Total';
+// import FEATURES from './index';
+import Features from './SummaryTotal/Features/Features';
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      // FEATURES,
       selected: {
         Processor: {
             name: '17th Generation Intel Core HB (7 Core with donut spare)',
@@ -36,19 +41,6 @@ class App extends Component {
   }
 
   render() {
-    // this needs to be its own component
-    const summary = Object.keys(this.state.selected)
-          .map(key => <div className="summary__option" key={key}>
-            <div className="summary__option__label">{key}  </div>
-            <div className="summary__option__value">{this.state.selected[key].name}</div>
-            <div className="summary__option__cost">
-              { new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                  .format(this.state.selected[key].cost) }
-            </div>
-        </div>)
-
-    const total = Object.keys(this.state.selected)
-          .reduce((acc, curr) => acc + this.state.selected[curr].cost, 0);    
 
     // this needs to be its own component
     const features = Object.keys(this.props.features)
@@ -87,18 +79,13 @@ class App extends Component {
           <section className="main__form">
             <h3>TECH SPECS AND CUSTOMIZATIONS</h3> 
             { features }
+            {/* <Features features={this.props.features}/> */}
           </section>
           {/*     // this needs to be its own component */}
           <section className="main__summary">
             <h3>NEW GREENLEAF 2018</h3>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Your Price: </div>
-              <div className="summary__total__value">
-              { new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                  .format(total) }
-              </div>
-            </div>
+            <Summary selected={this.state.selected} />
+            <Total selected={this.state.selected} />
           </section>
         </main>
       </div>
