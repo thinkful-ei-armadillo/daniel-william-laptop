@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // FEATURES,
+
       selected: {
         Processor: {
             name: '17th Generation Intel Core HB (7 Core with donut spare)',
@@ -43,29 +43,29 @@ class App extends Component {
   render() {
 
     // this needs to be its own component
-    const features = Object.keys(this.props.features)
-          .map(key => {
-            const options = this.props.features[key].map((item, index) => {
-              const selectedClass = item.name === this.state.selected[key].name ? 'feature__selected' : '';
-              const featureClass = 'feature__option ' + selectedClass;
-              return <li key={index} className="feature__item">
-                <div className={featureClass}
+    // const features = Object.keys(this.props.features)
+    //       .map(key => {
+    //         const options = this.props.features[key].map((item, index) => {
+    //           const selectedClass = item.name === this.state.selected[key].name ? 'feature__selected' : '';
+    //           const featureClass = 'feature__option ' + selectedClass;
+    //           return <li key={index} className="feature__item">
+    //             <div className={featureClass}
                   
-                  onClick={e => this.updateFeature(key, item)}>
-                    { item.name }
-                    ({ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                      .format(item.cost) })
-                </div>
-              </li>
-            });
+    //               onClick={e => this.updateFeature(key, item)}>
+    //                 { item.name }
+    //                 ({ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
+    //                   .format(item.cost) })
+    //             </div>
+    //           </li>
+    //         });
 
-            return <div className="feature" key={key}>
-              <div className="feature__name">{key}</div>
-              <ul className="feature__list">
-                { options }
-              </ul>
-            </div>
-          });      
+    //         return <div className="feature" key={key}>
+    //           <div className="feature__name">{key}</div>
+    //           <ul className="feature__list">
+    //             { options }
+    //           </ul>
+    //         </div>
+    //       });      
 
     return (
       <div className="App">
@@ -78,8 +78,11 @@ class App extends Component {
           {/*     // this needs to be its own component */}
           <section className="main__form">
             <h3>TECH SPECS AND CUSTOMIZATIONS</h3> 
-            { features }
-            {/* <Features features={this.props.features}/> */}
+            {/* { features } */}
+            <Features features={this.props.features} 
+            selected={this.state.selected}
+            updateFeature={item => this.updateFeature(item)}
+            />
           </section>
           {/*     // this needs to be its own component */}
           <section className="main__summary">
