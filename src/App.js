@@ -26,6 +26,7 @@ class App extends Component {
     }
   }
 
+// this stays here as a method so it can be used as a prop for all children
   updateFeature(feature, newValue) {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
@@ -35,6 +36,7 @@ class App extends Component {
   }
 
   render() {
+    // this needs to be its own component
     const summary = Object.keys(this.state.selected)
           .map(key => <div className="summary__option" key={key}>
             <div className="summary__option__label">{key}  </div>
@@ -48,7 +50,7 @@ class App extends Component {
     const total = Object.keys(this.state.selected)
           .reduce((acc, curr) => acc + this.state.selected[curr].cost, 0);    
 
-
+    // this needs to be its own component
     const features = Object.keys(this.props.features)
           .map(key => {
             const options = this.props.features[key].map((item, index) => {
@@ -81,10 +83,12 @@ class App extends Component {
           <h5>Customize your laptop</h5>  
         </header>      
         <main>
+          {/*     // this needs to be its own component */}
           <section className="main__form">
-            <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
+            <h3>TECH SPECS AND CUSTOMIZATIONS</h3> 
             { features }
           </section>
+          {/*     // this needs to be its own component */}
           <section className="main__summary">
             <h3>NEW GREENLEAF 2018</h3>
             {summary}
